@@ -10,11 +10,17 @@
 		DEC12FBF25F569DF00FE3D85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC12FBE25F569DF00FE3D85 /* AppDelegate.swift */; };
 		DEC12FC125F569DF00FE3D85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC12FC025F569DF00FE3D85 /* SceneDelegate.swift */; };
 		DEC12FC325F569DF00FE3D85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC12FC225F569DF00FE3D85 /* ContentView.swift */; };
-		DEC12FC625F569DF00FE3D85 /* BookWorm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEC12FC425F569DF00FE3D85 /* BookWorm.xcdatamodeld */; };
 		DEC12FC825F569E100FE3D85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC12FC725F569E100FE3D85 /* Assets.xcassets */; };
 		DEC12FCB25F569E100FE3D85 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC12FCA25F569E100FE3D85 /* Preview Assets.xcassets */; };
 		DEC12FCE25F569E100FE3D85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC12FCC25F569E100FE3D85 /* LaunchScreen.storyboard */; };
 		DEC12FD825F56B5200FE3D85 /* AboutBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC12FD725F56B5200FE3D85 /* AboutBinding.swift */; };
+		DED23B3F25F6671900CD93C3 /* AboutSizeClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED23B3E25F6671900CD93C3 /* AboutSizeClasses.swift */; };
+		DED23B4225F66CAE00CD93C3 /* AboutCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED23B4125F66CAE00CD93C3 /* AboutCoreData.swift */; };
+		DED23B4525F67C8700CD93C3 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED23B4425F67C8700CD93C3 /* AddBookView.swift */; };
+		DED23B4925F6803600CD93C3 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED23B4825F6803600CD93C3 /* RatingView.swift */; };
+		DED23B4C25F6839900CD93C3 /* EmojiRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED23B4B25F6839900CD93C3 /* EmojiRatingView.swift */; };
+		DED23B5125F687E300CD93C3 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED23B5025F687E300CD93C3 /* DetailView.swift */; };
+		DED23B5525F68B7100CD93C3 /* BookWorm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEC12FC425F569DF00FE3D85 /* BookWorm.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +34,12 @@
 		DEC12FCD25F569E100FE3D85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DEC12FCF25F569E100FE3D85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEC12FD725F56B5200FE3D85 /* AboutBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutBinding.swift; sourceTree = "<group>"; };
+		DED23B3E25F6671900CD93C3 /* AboutSizeClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSizeClasses.swift; sourceTree = "<group>"; };
+		DED23B4125F66CAE00CD93C3 /* AboutCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCoreData.swift; sourceTree = "<group>"; };
+		DED23B4425F67C8700CD93C3 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
+		DED23B4825F6803600CD93C3 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		DED23B4B25F6839900CD93C3 /* EmojiRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiRatingView.swift; sourceTree = "<group>"; };
+		DED23B5025F687E300CD93C3 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +76,10 @@
 				DEC12FBE25F569DF00FE3D85 /* AppDelegate.swift */,
 				DEC12FC025F569DF00FE3D85 /* SceneDelegate.swift */,
 				DEC12FC225F569DF00FE3D85 /* ContentView.swift */,
+				DED23B4425F67C8700CD93C3 /* AddBookView.swift */,
+				DED23B4825F6803600CD93C3 /* RatingView.swift */,
+				DED23B5025F687E300CD93C3 /* DetailView.swift */,
+				DED23B4B25F6839900CD93C3 /* EmojiRatingView.swift */,
 				DEC12FC725F569E100FE3D85 /* Assets.xcassets */,
 				DEC12FCC25F569E100FE3D85 /* LaunchScreen.storyboard */,
 				DEC12FCF25F569E100FE3D85 /* Info.plist */,
@@ -85,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				DEC12FD725F56B5200FE3D85 /* AboutBinding.swift */,
+				DED23B3E25F6671900CD93C3 /* AboutSizeClasses.swift */,
+				DED23B4125F66CAE00CD93C3 /* AboutCoreData.swift */,
 			);
 			path = Introduction;
 			sourceTree = "<group>";
@@ -159,9 +177,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DED23B4C25F6839900CD93C3 /* EmojiRatingView.swift in Sources */,
+				DED23B5525F68B7100CD93C3 /* BookWorm.xcdatamodeld in Sources */,
 				DEC12FD825F56B5200FE3D85 /* AboutBinding.swift in Sources */,
+				DED23B3F25F6671900CD93C3 /* AboutSizeClasses.swift in Sources */,
 				DEC12FBF25F569DF00FE3D85 /* AppDelegate.swift in Sources */,
-				DEC12FC625F569DF00FE3D85 /* BookWorm.xcdatamodeld in Sources */,
+				DED23B4925F6803600CD93C3 /* RatingView.swift in Sources */,
+				DED23B5125F687E300CD93C3 /* DetailView.swift in Sources */,
+				DED23B4525F67C8700CD93C3 /* AddBookView.swift in Sources */,
+				DED23B4225F66CAE00CD93C3 /* AboutCoreData.swift in Sources */,
 				DEC12FC125F569DF00FE3D85 /* SceneDelegate.swift in Sources */,
 				DEC12FC325F569DF00FE3D85 /* ContentView.swift in Sources */,
 			);
