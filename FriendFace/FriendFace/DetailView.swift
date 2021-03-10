@@ -42,7 +42,7 @@ struct DetailView: View {
             Section(header: Text("Friends")) {
                 ForEach(user.friends) { friend in
                     NavigationLink(
-                        destination: DetailView(user: getUserby(id: friend.id) ?? user, users: users),
+                        destination: DetailView(user: getUserby(id: friend.id) ?? self.user, users: self.users),
                         label: {
                             VStack(alignment: .leading) {
                                 Text(friend.name)
