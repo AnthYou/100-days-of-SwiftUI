@@ -20,8 +20,3 @@ struct User: Identifiable, Codable {
     let tags: [String]
     let friends: [Friend]
 }
-
-struct Friend: Identifiable, Codable {
-    let id: UUID
-    let name: String
-}

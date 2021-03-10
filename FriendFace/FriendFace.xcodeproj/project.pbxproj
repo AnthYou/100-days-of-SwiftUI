@@ -15,6 +15,7 @@
 		DE869FC825F801FD005A5312 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE869FC725F801FD005A5312 /* DetailView.swift */; };
 		DE869FCB25F80462005A5312 /* friendface.json in Resources */ = {isa = PBXBuildFile; fileRef = DE869FCA25F80462005A5312 /* friendface.json */; };
 		DE869FCE25F804EB005A5312 /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE869FCD25F804EB005A5312 /* Bundle-Decodable.swift */; };
+		DEA465E525F8CF4B00F29953 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA465E425F8CF4B00F29953 /* Friend.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		DE869FC725F801FD005A5312 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		DE869FCA25F80462005A5312 /* friendface.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = friendface.json; sourceTree = "<group>"; };
 		DE869FCD25F804EB005A5312 /* Bundle-Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
+		DEA465E425F8CF4B00F29953 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				DE869FC725F801FD005A5312 /* DetailView.swift */,
 				DE869FCD25F804EB005A5312 /* Bundle-Decodable.swift */,
 				DE5DEE8B25F7C77A00CAA8B5 /* User.swift */,
+				DEA465E425F8CF4B00F29953 /* Friend.swift */,
 				DE5DEE7F25F7C6EB00CAA8B5 /* Assets.xcassets */,
 				DE5DEE8425F7C6EB00CAA8B5 /* Info.plist */,
 				DE869FCA25F80462005A5312 /* friendface.json */,
@@ -154,6 +157,7 @@
 				DE5DEE7E25F7C6EA00CAA8B5 /* ContentView.swift in Sources */,
 				DE869FC825F801FD005A5312 /* DetailView.swift in Sources */,
 				DE869FCE25F804EB005A5312 /* Bundle-Decodable.swift in Sources */,
+				DEA465E525F8CF4B00F29953 /* Friend.swift in Sources */,
 				DE5DEE7C25F7C6EA00CAA8B5 /* FriendFaceApp.swift in Sources */,
 				DE5DEE8C25F7C77A00CAA8B5 /* User.swift in Sources */,
 			);

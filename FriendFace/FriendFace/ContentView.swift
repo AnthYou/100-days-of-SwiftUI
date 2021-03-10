@@ -14,12 +14,12 @@ struct ContentView: View {
         NavigationView {
             List(users, id: \.id) { user in
                 NavigationLink(
-                    destination: DetailView(user: user),
+                    destination: DetailView(user: user, users: users),
                     label: {
                         VStack(alignment: .leading) {
                             Text(user.name)
-                            Text("\(user.age) years old")
-                            Text(user.company)
+                            Text(user.email)
+                                .foregroundColor(.secondary)
                         }
                     })
                 

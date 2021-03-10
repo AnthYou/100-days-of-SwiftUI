@@ -9,34 +9,56 @@ import SwiftUI
 
 struct DetailView: View {
     let user: User
+    
     var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         return formatter.string(from: user.registered)
     }
+    
     var formattedTags: String {
         return user.tags.joined(separator: ", ")
     }
     
+    var users: [User]
+        
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading, spacing: 10) {
+        List {
+            Section(header: Text("Personal info")) {
                 Text("Age: \(user.age) years old")
                 Text("Company: \(user.company)")
                 Text("Email: \(user.email)")
                 Text("Address: \(user.address)")
-                Text("About: \(user.about)")
-                Text("Registered on \(formattedDate)")
-                Divider()
-                Text("Tags:")
-                Text(formattedTags)
-                Spacer()
             }
-            .padding()
-            .navigationBarTitle(user.name)
-            .navigationViewStyle(StackNavigationViewStyle())
+            Section(header: Text("Description")) {
+                Text(user.about)
+            }
+            Section(header: Text("Registered on")) {
+                Text(formattedDate)
+            }
+            Section(header: Text("Tags")) {
+                Text(formattedTags)
+            }
+            Section(header: Text("Friends")) {
+                ForEach(user.friends) { friend in
+                    NavigationLink(
+                        destination: DetailView(user: getUserby(id: friend.id) ?? user, users: users),
+                        label: {
+                            VStack(alignment: .leading) {
+                                Text(friend.name)
+                                Text(getUserby(id: friend.id)?.email ?? "")
+                                    .foregroundColor(.secondary)
+                            }
+                        })
+                }
+            }
         }
-        
+        .navigationBarTitle(user.name)
+        .navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    func getUserby(id: UUID) -> User? {
+        return users.first(where: { $0.id == id })
     }
 }
 
@@ -44,18 +66,6 @@ struct DetailView_Previews: PreviewProvider {
     static let users: [User] = Bundle.main.decode("friendface.json")
     
     static var previews: some View {
-        DetailView(user: users[0])
+        DetailView(user: users[0], users: users)
     }
 }
-
-//let id: UUID
-//let isActive: Bool
-//let name: String
-//let age: Int
-//let company: String
-//let email: String
-//let address: String
-//let about: String
-//let registered: Date
-//let tags: [String]
-//let friends: [Friend]
