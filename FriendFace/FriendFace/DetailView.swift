@@ -20,7 +20,7 @@ struct DetailView: View {
         return user.tags.joined(separator: ", ")
     }
     
-    var users: [User]
+    let users: [User]
         
     var body: some View {
         List {
