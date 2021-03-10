@@ -63,11 +63,9 @@
 			isa = PBXGroup;
 			children = (
 				DE5DEE7B25F7C6EA00CAA8B5 /* FriendFaceApp.swift */,
-				DE5DEE7D25F7C6EA00CAA8B5 /* ContentView.swift */,
-				DE869FC725F801FD005A5312 /* DetailView.swift */,
-				DE869FCD25F804EB005A5312 /* Bundle-Decodable.swift */,
-				DE5DEE8B25F7C77A00CAA8B5 /* User.swift */,
-				DEA465E425F8CF4B00F29953 /* Friend.swift */,
+				DEA465E925F8DD8000F29953 /* Models */,
+				DEA465EB25F8DD8800F29953 /* Views */,
+				DEA465E725F8DD7700F29953 /* Helpers */,
 				DE5DEE7F25F7C6EB00CAA8B5 /* Assets.xcassets */,
 				DE5DEE8425F7C6EB00CAA8B5 /* Info.plist */,
 				DE869FCA25F80462005A5312 /* friendface.json */,
@@ -82,6 +80,32 @@
 				DE5DEE8225F7C6EB00CAA8B5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DEA465E725F8DD7700F29953 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DE869FCD25F804EB005A5312 /* Bundle-Decodable.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DEA465E925F8DD8000F29953 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DE5DEE8B25F7C77A00CAA8B5 /* User.swift */,
+				DEA465E425F8CF4B00F29953 /* Friend.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DEA465EB25F8DD8800F29953 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DE5DEE7D25F7C6EA00CAA8B5 /* ContentView.swift */,
+				DE869FC725F801FD005A5312 /* DetailView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
