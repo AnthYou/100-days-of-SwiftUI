@@ -56,7 +56,7 @@ struct ContentView: View {
             VStack {
                 ZStack {
                     Rectangle()
-                        .fill(Color.secondary)
+                        .fill(image != nil ? Color.clear : Color.secondary)
                     
                     // display the image
                     if image != nil {
