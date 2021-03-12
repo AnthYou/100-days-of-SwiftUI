@@ -12,6 +12,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var image: Image?
     @State private var filterIntensity = 0.5
+    @State private var filterRadius = 0.5
+    @State private var filterScale = 0.5
     
     @State private var showingFilterSheet = false
     @State private var showingImagePicker = false
@@ -20,6 +22,8 @@ struct ContentView: View {
     
     @State private var currentFilter: CIFilter = CIFilter.sepiaTone()
     let context = CIContext()
+    
+    @State private var isSavingWithoutImage = false
 
     var body: some View {
         let intensity = Binding<Double>(
@@ -28,6 +32,22 @@ struct ContentView: View {
             },
             set: {
                 self.filterIntensity = $0
+                self.applyProcessing()
+            }
+        )
+        
+        let radius = Binding<Double>(
+            get: { self.filterRadius },
+            set: {
+                self.filterRadius = $0
+                self.applyProcessing()
+            }
+        )
+        
+        let scale = Binding<Double>(
+            get: { self.filterScale },
+            set: {
+                self.filterScale = $0
                 self.applyProcessing()
             }
         )
@@ -54,22 +74,45 @@ struct ContentView: View {
                     self.showingImagePicker = true
                 }
                 
-                HStack {
-                    Text("Intensity")
-                    Slider(value: intensity)
-                }.padding(.vertical)
+                VStack {
+                    if currentFilter.inputKeys.contains(kCIInputIntensityKey) {
+                        HStack {
+                            Text("Intensity")
+                            Slider(value: intensity)
+                        }
+                    }
+                    if currentFilter.inputKeys.contains(kCIInputRadiusKey) {
+                        HStack {
+                            Text("Radius")
+                            Slider(value: radius)
+                        }
+                    }
+                    if currentFilter.inputKeys.contains(kCIInputScaleKey) {
+                        HStack {
+                            Text("Scale")
+                            Slider(value: scale)
+                        }
+                    }
+                }
+                .padding(.vertical)
                 
                 HStack {
-                    Button("Change Filter") {
+                    Button(action: {
                         // change filter
                         self.showingFilterSheet = true
-                    }
+                    }, label: {
+                        Image(systemName: "arrow.left.arrow.right")
+                        Text(currentFilter.name)
+                    })
                     
                     Spacer()
                     
                     Button("Save") {
                         // save the picture
-                        guard let processedImage = self.processedImage else { return }
+                        guard let processedImage = self.processedImage else {
+                            self.isSavingWithoutImage = true
+                            return
+                        }
                         
                         let imageSaver = ImageSaver()
                         
@@ -102,7 +145,11 @@ struct ContentView: View {
                     .cancel()
                 ])
             }
+            .alert(isPresented: $isSavingWithoutImage, content: {
+                Alert(title: Text("No image error"), message: Text("Please provide an image first."), dismissButton: .default(Text("OK")))
+            })
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     func loadImage() {
@@ -118,8 +165,8 @@ struct ContentView: View {
         /// only works with filters with intensity value so we have to adapt our code
         let inputKeys = currentFilter.inputKeys
         if inputKeys.contains(kCIInputIntensityKey) { currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey) }
-        if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterIntensity * 200, forKey: kCIInputRadiusKey) }
-        if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterIntensity * 10, forKey: kCIInputScaleKey) }
+        if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterRadius * 200, forKey: kCIInputRadiusKey) }
+        if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterScale * 10, forKey: kCIInputScaleKey) }
         
         guard let outputImage = currentFilter.outputImage else { return }
 
