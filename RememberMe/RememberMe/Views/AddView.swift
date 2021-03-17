@@ -17,41 +17,42 @@ struct AddView: View {
     @State private var inputImage: UIImage?
     
     @State private var inputName = ""
+    @State private var placeName = ""
     
     @State private var isFormValid = false
     @State private var isShowingAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     
+    let locationFetcher = LocationFetcher()
+    
     var body: some View {
         NavigationView {
-            VStack {
-                GeometryReader { geo in
-                    ZStack {
-                        Rectangle()
-                            .fill(image != nil ? Color.clear : Color.secondary)
-                            .frame(width: geo.size.width, height: 300, alignment: .center)
+            Form {
+                Section {
+                    if image != nil {
+                        image!
+                            .resizable()
+                            .scaledToFit()
                             .onTapGesture {
                                 self.showingImagePicker = true
                             }
                         
-                        if image != nil {
-                            image!
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: geo.size.width, height: 300, alignment: .center)
-                                .onTapGesture {
-                                    self.showingImagePicker = true
-                                }
-                            
-                        } else {
-                            Text("Tap to select a picture")
-                                .foregroundColor(.white)
-                                .font(.headline)
-                        }
+                    } else {
+                        Button(action: {
+                            self.showingImagePicker = true
+                        }, label: {
+                            HStack {
+                                Image(systemName: "camera")
+                                Text("Take a picture")
+                            }
+                        })
                     }
                 }
-                TextField("Contact name", text: $inputName)
+                Section(header: Text("Contact information")) {
+                    TextField("Contact name", text: $inputName)
+                    TextField("Place where you met", text: $placeName)
+                }
             }
             .padding()
             .navigationTitle("Add contact")
@@ -59,13 +60,21 @@ struct AddView: View {
                 self.checkValidation()
                 
                 if self.isFormValid {
-                    let user = User(id: UUID(), name: inputName, photo: UUID())
+                    let annotation = CodableMKPointAnnotation()
+                    if let location = locationFetcher.lastKnownLocation {
+                        annotation.coordinate = location
+                        annotation.title = self.placeName
+                    }
+                    let user = User(id: UUID(), name: inputName, photo: UUID(), annotation: annotation)
                     self.usersViewModel.users.append(user)
                     self.savePhoto(with: user.photo)
                     self.presentationMode.wrappedValue.dismiss()
                 } else {
                     isShowingAlert = true
                 }
+            })
+            .onAppear(perform: {
+                self.locationFetcher.start()
             })
             .sheet(isPresented: $showingImagePicker, onDismiss: loadImage, content: {
                 ImagePicker(image: self.$inputImage)
@@ -93,7 +102,7 @@ struct AddView: View {
     // MARK: Handle Form Validations
     
     func checkValidation() {
-        if (!inputName.isEmpty) && (inputImage != nil) {
+        if (!inputName.isEmpty) && (!placeName.isEmpty) && (inputImage != nil) {
             isFormValid = true
         } else if inputName.isEmpty {
             alertTitle = "Name is empty"
@@ -101,6 +110,9 @@ struct AddView: View {
         } else if image == nil {
             alertTitle = "Photo is missing"
             alertMessage = "You must provide a photo."
+        } else if placeName.isEmpty {
+            alertTitle = "Place name is empty"
+            alertMessage = "You must provide a place name."
         }
     }
 }

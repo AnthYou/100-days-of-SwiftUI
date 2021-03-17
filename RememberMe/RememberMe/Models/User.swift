@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Foundation
+import CoreLocation
 
 struct User: Identifiable, Codable, Comparable {
     static func < (lhs: User, rhs: User) -> Bool {
@@ -16,6 +16,7 @@ struct User: Identifiable, Codable, Comparable {
     let id: UUID
     let name: String
     let photo: UUID
+    let annotation: CodableMKPointAnnotation?
     
     func loadPhoto(with photo: UUID) -> UIImage? {
         if let uiImage = FileManager.default.loadPhoto(withName: photo.uuidString) {

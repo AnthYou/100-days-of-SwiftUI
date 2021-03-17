@@ -18,7 +18,7 @@ struct MainView: View {
                     destination: DetailView(user: user),
                     label: {
                         HStack {
-                            Image(uiImage: user.loadPhoto(with: user.photo) ?? UIImage())
+                            Image(uiImage: user.loadPhoto(with: user.photo) ?? UIImage(imageLiteralResourceName: "Example"))
                                 .resizable()
                                 .scaledToFit()
                                 .clipped()
