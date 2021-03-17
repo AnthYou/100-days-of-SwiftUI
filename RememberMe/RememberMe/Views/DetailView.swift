@@ -15,8 +15,8 @@ struct DetailView: View {
             VStack {
                 Image(uiImage: user.loadPhoto(with: user.photo) ?? UIImage())
                     .resizable()
-                    .frame(width: geo.size.width, height: geo.size.height / 2, alignment: .center)
                     .scaledToFit()
+                    .frame(width: geo.size.width, height: geo.size.height / 2, alignment: .center)
                 Text(user.name)
                     .font(.largeTitle)
             }

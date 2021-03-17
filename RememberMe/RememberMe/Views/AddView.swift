@@ -38,8 +38,11 @@ struct AddView: View {
                         if image != nil {
                             image!
                                 .resizable()
-                                .frame(width: geo.size.width, height: 300, alignment: .center)
                                 .scaledToFit()
+                                .frame(width: geo.size.width, height: 300, alignment: .center)
+                                .onTapGesture {
+                                    self.showingImagePicker = true
+                                }
                             
                         } else {
                             Text("Tap to select a picture")

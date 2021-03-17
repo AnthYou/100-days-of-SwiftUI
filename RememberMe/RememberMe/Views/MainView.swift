@@ -20,6 +20,7 @@ struct MainView: View {
                         HStack {
                             Image(uiImage: user.loadPhoto(with: user.photo) ?? UIImage())
                                 .resizable()
+                                .scaledToFit()
                                 .clipped()
                                 .frame(width: 100, height: 100, alignment: .leading)
                                 .padding(.trailing)
