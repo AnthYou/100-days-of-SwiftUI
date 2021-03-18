@@ -14,9 +14,14 @@ struct ProspectsView: View {
         case none, contacted, uncontacted
     }
     
+    enum SortType {
+        case name, recent
+    }
+    
     @EnvironmentObject var prospects: Prospects
     
     @State private var isShowingScanner = false
+    @State private var isShowingSortMenu = false
     
     let filter: FilterType
     
@@ -42,16 +47,35 @@ struct ProspectsView: View {
         }
     }
     
+    // Sort prospect
+    @State private var sort: SortType = .recent
+    
+    var filteredSortedProspects: [Prospect] {
+        switch sort {
+        case .name:
+            return filteredProspects.sorted { $0.name < $1.name }
+        case .recent:
+            return filteredProspects.sorted { $0.date > $1.date }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(filteredProspects) { prospect in
-                    VStack(alignment: .leading) {
-                        Text(prospect.name)
-                            .font(.headline)
-                        Text(prospect.emailAddress)
-                            .foregroundColor(.secondary)
+                ForEach(filteredSortedProspects) { prospect in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(prospect.name)
+                                .font(.headline)
+                            Text(prospect.emailAddress)
+                                .foregroundColor(.secondary)
+                        }
+                        if filter == .none {
+                            Spacer()
+                            Image(systemName: prospect.isContacted ? "person.fill.checkmark" : "person.fill.questionmark")
+                        }
                     }
+                    
                     .contextMenu {
                         Button(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted" ) {
                             self.prospects.toggle(prospect)
@@ -66,11 +90,22 @@ struct ProspectsView: View {
                 }
             }
             .navigationBarTitle(title)
-            .navigationBarItems(trailing: Button(action: {
+            .navigationBarItems(leading: Button(action: {
+                self.isShowingSortMenu = true
+            }, label: {
+                Text("Sort")
+            }), trailing: Button(action: {
                 self.isShowingScanner = true
             }) {
                 Image(systemName: "qrcode.viewfinder")
                 Text("Scan")
+            })
+            .actionSheet(isPresented: $isShowingSortMenu, content: {
+                ActionSheet(title: Text("Sort by"), buttons: [
+                    .default(Text("Most recent"), action: { self.sort = .recent }),
+                    .default(Text("Name"), action: { self.sort = .name }),
+                    .cancel()
+                ])
             })
             .sheet(isPresented: $isShowingScanner) {
                 CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
@@ -92,7 +127,7 @@ struct ProspectsView: View {
             
             self.prospects.add(person)
         case .failure(let error):
-            print("Scanning failed")
+            print("Scanning failed, \(error.localizedDescription)")
         }
     }
     
@@ -105,10 +140,12 @@ struct ProspectsView: View {
             content.subtitle = prospect.emailAddress
             content.sound = UNNotificationSound.default
 
-//            var dateComponents = DateComponents()
-//            dateComponents.hour = 9
-//            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+            // set notification next time it is 9AM
+            // var dateComponents = DateComponents()
+            // dateComponents.hour = 9
+            // let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
             
+            // 5 seconds delay for testing purposes
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
