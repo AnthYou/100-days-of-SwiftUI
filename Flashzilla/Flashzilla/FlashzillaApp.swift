@@ -11,8 +11,7 @@ import SwiftUI
 struct FlashzillaApp: App {
     var body: some Scene {
         WindowGroup {
-            GestureSequenceDemo()
-            // ContentView()
+             ContentView()
         }
     }
 }
