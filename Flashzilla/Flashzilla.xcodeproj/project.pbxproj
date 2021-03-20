@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE8A3A8F260659AE00E92650 /* EditCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A3A8E260659AE00E92650 /* EditCards.swift */; };
 		DE96F2832604C053006BFEFF /* AboutVibrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE96F2822604C053006BFEFF /* AboutVibrations.swift */; };
 		DE96F2862604EC9C006BFEFF /* AboutAllowsHitTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE96F2852604EC9C006BFEFF /* AboutAllowsHitTesting.swift */; };
 		DE96F2892604EE46006BFEFF /* AboutTriggeringEventsRepeatedlyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE96F2882604EE46006BFEFF /* AboutTriggeringEventsRepeatedlyTimer.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE8A3A8E260659AE00E92650 /* EditCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCards.swift; sourceTree = "<group>"; };
 		DE96F2822604C053006BFEFF /* AboutVibrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutVibrations.swift; sourceTree = "<group>"; };
 		DE96F2852604EC9C006BFEFF /* AboutAllowsHitTesting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAllowsHitTesting.swift; sourceTree = "<group>"; };
 		DE96F2882604EE46006BFEFF /* AboutTriggeringEventsRepeatedlyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTriggeringEventsRepeatedlyTimer.swift; sourceTree = "<group>"; };
@@ -51,6 +53,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE8A3A91260659E000E92650 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DE96F2912604F3C1006BFEFF /* Card.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DE8A3A93260659F100E92650 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DEC5CD852603CA2B00BB6C45 /* ContentView.swift */,
+				DE96F2942604F5DB006BFEFF /* CardView.swift */,
+				DE8A3A8E260659AE00E92650 /* EditCards.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		DEC5CD772603CA2B00BB6C45 = {
 			isa = PBXGroup;
 			children = (
@@ -72,9 +92,8 @@
 			children = (
 				DEC5CD932603CA5400BB6C45 /* Introduction */,
 				DEC5CD832603CA2B00BB6C45 /* FlashzillaApp.swift */,
-				DE96F2912604F3C1006BFEFF /* Card.swift */,
-				DEC5CD852603CA2B00BB6C45 /* ContentView.swift */,
-				DE96F2942604F5DB006BFEFF /* CardView.swift */,
+				DE8A3A91260659E000E92650 /* Models */,
+				DE8A3A93260659F100E92650 /* Views */,
 				DEC5CD872603CA2D00BB6C45 /* Assets.xcassets */,
 				DEC5CD8C2603CA2D00BB6C45 /* Info.plist */,
 				DEC5CD892603CA2D00BB6C45 /* Preview Content */,
@@ -182,6 +201,7 @@
 				DEC5CD982603DD7200BB6C45 /* GestureSequenceDemo.swift in Sources */,
 				DE96F2922604F3C1006BFEFF /* Card.swift in Sources */,
 				DEC5CD952603CA6700BB6C45 /* AboutGestures.swift in Sources */,
+				DE8A3A8F260659AE00E92650 /* EditCards.swift in Sources */,
 				DE96F2952604F5DB006BFEFF /* CardView.swift in Sources */,
 				DEC5CD842603CA2B00BB6C45 /* FlashzillaApp.swift in Sources */,
 			);
