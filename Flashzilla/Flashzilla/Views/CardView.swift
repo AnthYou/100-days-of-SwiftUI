@@ -93,5 +93,8 @@ struct CardView: View {
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
         CardView(card: Card.example)
+            .previewLayout(.fixed(width: 2532 / 3.0, height: 1170 / 3.0))
+            .environment(\.horizontalSizeClass, .regular)
+            .environment(\.verticalSizeClass, .compact)
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreHaptics
 
 extension View {
     func stacked(at position: Int, in total: Int) -> some View {
@@ -26,6 +27,8 @@ struct ContentView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @State private var showingEditScreen = false
+    
+    @State private var engine: CHHapticEngine?
 
     var body: some View {
         ZStack {
@@ -35,16 +38,23 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("Time: \(timeRemaining)")
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 5)
-                    .background(
-                        Capsule()
-                            .fill(Color.black)
-                            .opacity(0.75)
-                    )
+                if timeRemaining == 0 {
+                    Text("Time's up!")
+                        .font(.largeTitle)
+                        .fontWeight(.black)
+                        .foregroundColor(.white)
+                } else {
+                    Text("Time: \(timeRemaining)")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 5)
+                        .background(
+                            Capsule()
+                                .fill(Color.black)
+                                .opacity(0.75)
+                        )
+                }
                 
                 ZStack {
                     ForEach(0..<cards.count, id: \.self) { index in
@@ -130,6 +140,13 @@ struct ContentView: View {
             guard self.isActive else { return }
             if self.timeRemaining > 0 {
                 self.timeRemaining -= 1
+            
+                if self.timeRemaining == 2 {
+                    self.prepareHaptics()
+                } else if self.timeRemaining == 0 {
+                    self.complexEnding()
+                }
+                
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
@@ -169,10 +186,56 @@ struct ContentView: View {
             }
         }
     }
+    
+    // MARK: Core Haptics
+    
+    func prepareHaptics() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+
+        do {
+            self.engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print("There was an error creating the engine: \(error.localizedDescription)")
+        }
+    }
+    
+    func complexEnding() {
+        // make sure that the device supports haptics
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        var events = [CHHapticEvent]()
+        
+        // get several taps of increasing then decreasing intensity and sharpness
+        for i in stride(from: 0, to: 1, by: 0.1) {
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i))
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(i))
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: i)
+            events.append(event)
+        }
+
+        for i in stride(from: 0, to: 1, by: 0.1) {
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(1 - i))
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(1 - i))
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 1 + i)
+            events.append(event)
+        }
+
+        // convert those events into a pattern and play it immediately
+        do {
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print("Failed to play pattern: \(error.localizedDescription).")
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewLayout(.fixed(width: 2532 / 3.0, height: 1170 / 3.0))
+            .environment(\.horizontalSizeClass, .regular)
+            .environment(\.verticalSizeClass, .compact)
     }
 }
