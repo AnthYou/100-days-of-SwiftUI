@@ -29,6 +29,8 @@ struct ContentView: View {
     @State private var showingEditScreen = false
     
     @State private var engine: CHHapticEngine?
+    
+    @State private var isReplayingWrongCards = true
 
     var body: some View {
         ZStack {
@@ -170,6 +172,14 @@ struct ContentView: View {
         if cards.isEmpty {
             isActive = false
         }
+    }
+    
+    func restackCard(at index: Int) {
+        guard index >= 0 else { return }
+        
+        let card = cards[index]
+        cards.remove(at: index)
+        cards.insert(card, at: 0)
     }
     
     func resetCards() {
