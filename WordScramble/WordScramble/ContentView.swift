@@ -31,6 +31,7 @@ struct ContentView: View {
                         GeometryReader { itemProxy in
                             HStack {
                                 Image(systemName: "\(word.count).circle")
+                                    .foregroundColor(self.getColor(listProxy: listProxy, itemProxy: itemProxy))
                                 Text(word)
                             }
                             .accessibilityElement(children: .ignore)
@@ -71,6 +72,23 @@ struct ContentView: View {
         }
         
         return 0
+    }
+    
+    func getColor(listProxy: GeometryProxy, itemProxy: GeometryProxy) -> Color {
+        let itemPercent = getItemPercent(listProxy: listProxy, itemProxy: itemProxy)
+        let colorValue = Double(itemPercent / 100)
+
+        return Color(red: 2 * colorValue, green: 2 * (1 - colorValue), blue: 0)
+    }
+
+    func getItemPercent(listProxy: GeometryProxy, itemProxy: GeometryProxy) -> CGFloat {
+        let listHeight = listProxy.size.height
+        let listStart = listProxy.frame(in: .global).minY
+        let itemStart = itemProxy.frame(in: .global).minY
+
+        let itemPercent = (itemStart - listStart) / listHeight * 100
+
+        return itemPercent
     }
     
     func startGame() {
