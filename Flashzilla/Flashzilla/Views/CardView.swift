@@ -12,13 +12,16 @@ struct CardView: View {
     @Environment(\.accessibilityEnabled) var accessibilityEnabled
 
     let card: Card
-    var removal: (() -> Void)? = nil
+    
+    let isReplayingWrongCards: Bool
+    
+    var removal: ((_ isCorrect: Bool) -> Void)? = nil
     
     @State private var isShowingAnswer = false
     @State private var offset = CGSize.zero
     
     @State private var feedback = UINotificationFeedbackGenerator()
-
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25, style: .continuous)
@@ -77,7 +80,11 @@ struct CardView: View {
                             self.feedback.notificationOccurred(.error)
                         }
                         
-                        self.removal?() // That question mark in there means the closure will only be called if it has been set.
+                        if (self.isReplayingWrongCards) && (self.offset.width < 0) {
+                            self.offset = .zero
+                        }
+                        
+                        self.removal?(self.offset.width > 0) // That question mark in there means the closure will only be called if it has been set.
                     } else { /// else we put the position back to origin, i.e. offset = 0
                         self.offset = .zero
                     }
@@ -92,7 +99,7 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card: Card.example)
+        CardView(card: Card.example, isReplayingWrongCards: true)
             .previewLayout(.fixed(width: 2532 / 3.0, height: 1170 / 3.0))
             .environment(\.horizontalSizeClass, .regular)
             .environment(\.verticalSizeClass, .compact)

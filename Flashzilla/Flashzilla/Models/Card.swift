@@ -7,11 +7,12 @@
 
 import Foundation
 
-struct Card: Codable {
+struct Card: Identifiable, Codable {
+    let id: UUID
     let prompt: String
     let answer: String
 
     static var example: Card {
-        Card(prompt: "Who played the 13th Doctor in Doctor Who?", answer: "Jodie Whittaker")
+        Card(id: UUID(), prompt: "Who played the 13th Doctor in Doctor Who?", answer: "Jodie Whittaker")
     }
 }
