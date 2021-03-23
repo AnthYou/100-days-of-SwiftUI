@@ -121,6 +121,11 @@ struct ContentView: View {
 
                     HStack {
                         Button(action: {
+                            if self.isReplayingWrongCards {
+                                self.restackCard(at: self.cards.count - 1)
+                                return
+                            }
+                            
                             withAnimation {
                                 self.removeCard(at: self.cards.count - 1)
                             }
