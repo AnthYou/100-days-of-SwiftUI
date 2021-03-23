@@ -26,15 +26,21 @@ struct ContentView: View {
                     .autocapitalization(.none)
                     .padding()
                     
-                
-                List(usedWords, id: \.self) { word in
-                    HStack {
-                        Image(systemName: "\(word.count).circle")
-                        Text(word)
+                GeometryReader { listProxy in
+                    List(usedWords, id: \.self) { word in
+                        GeometryReader { itemProxy in
+                            HStack {
+                                Image(systemName: "\(word.count).circle")
+                                Text(word)
+                            }
+                            .accessibilityElement(children: .ignore)
+                            .accessibility(label: Text("\(word), \(word.count) letters"))
+                            .frame(width: itemProxy.size.width, alignment: .leading)
+                            .offset(x: self.getOffset(listProxy: listProxy, itemProxy: itemProxy), y: 0)
+                        }
                     }
-                    .accessibilityElement(children: .ignore)
-                    .accessibility(label: Text("\(word), \(word.count) letters"))
                 }
+                
                 
                 Text("Score: \(score)")
             }
@@ -48,6 +54,23 @@ struct ContentView: View {
                 Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
             }
         }
+    }
+    
+    func getOffset(listProxy: GeometryProxy, itemProxy: GeometryProxy) -> CGFloat {
+        let listHeight = listProxy.size.height
+        let listStart = listProxy.frame(in: .global).minY
+        let itemStart = itemProxy.frame(in: .global).minY
+        
+        let itemPercent =  (itemStart - listStart) / listHeight * 100
+        
+        let thresholdPercent: CGFloat = 60
+        let indent: CGFloat = 9
+        
+        if itemPercent > thresholdPercent {
+            return (itemPercent - (thresholdPercent - 1)) * indent
+        }
+        
+        return 0
     }
     
     func startGame() {
