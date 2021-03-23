@@ -11,6 +11,13 @@
 		DEDF8D8A260A461200DCB03B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF8D89260A461200DCB03B /* ContentView.swift */; };
 		DEDF8D8C260A461500DCB03B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDF8D8B260A461500DCB03B /* Assets.xcassets */; };
 		DEDF8D8F260A461500DCB03B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDF8D8E260A461500DCB03B /* Preview Assets.xcassets */; };
+		DEDF8D98260A4A9C00DCB03B /* AboutLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF8D97260A4A9C00DCB03B /* AboutLayout.swift */; };
+		DEDF8D9B260A4E6700DCB03B /* AboutAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF8D9A260A4E6700DCB03B /* AboutAlignment.swift */; };
+		DEDF8D9E260A533900DCB03B /* AboutCustomAlignmentGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF8D9D260A533900DCB03B /* AboutCustomAlignmentGuide.swift */; };
+		DEDF8DA1260A57F200DCB03B /* AboutAbsolutePositioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF8DA0260A57F200DCB03B /* AboutAbsolutePositioning.swift */; };
+		DEDF8DA4260A5B5000DCB03B /* AboutFramesCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF8DA3260A5B5000DCB03B /* AboutFramesCoordinates.swift */; };
+		DEDF8DA7260A61BC00DCB03B /* AboutScrollViewEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF8DA6260A61BC00DCB03B /* AboutScrollViewEffects.swift */; };
+		DEDF8DAA260A63A200DCB03B /* AboutScrollViewEffects2.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF8DA9260A63A200DCB03B /* AboutScrollViewEffects2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +27,13 @@
 		DEDF8D8B260A461500DCB03B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEDF8D8E260A461500DCB03B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DEDF8D90260A461500DCB03B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEDF8D97260A4A9C00DCB03B /* AboutLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLayout.swift; sourceTree = "<group>"; };
+		DEDF8D9A260A4E6700DCB03B /* AboutAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAlignment.swift; sourceTree = "<group>"; };
+		DEDF8D9D260A533900DCB03B /* AboutCustomAlignmentGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCustomAlignmentGuide.swift; sourceTree = "<group>"; };
+		DEDF8DA0260A57F200DCB03B /* AboutAbsolutePositioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAbsolutePositioning.swift; sourceTree = "<group>"; };
+		DEDF8DA3260A5B5000DCB03B /* AboutFramesCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFramesCoordinates.swift; sourceTree = "<group>"; };
+		DEDF8DA6260A61BC00DCB03B /* AboutScrollViewEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScrollViewEffects.swift; sourceTree = "<group>"; };
+		DEDF8DA9260A63A200DCB03B /* AboutScrollViewEffects2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScrollViewEffects2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +68,13 @@
 			children = (
 				DEDF8D87260A461200DCB03B /* LayoutAndGeometryApp.swift */,
 				DEDF8D89260A461200DCB03B /* ContentView.swift */,
+				DEDF8DA3260A5B5000DCB03B /* AboutFramesCoordinates.swift */,
+				DEDF8DA6260A61BC00DCB03B /* AboutScrollViewEffects.swift */,
+				DEDF8DA9260A63A200DCB03B /* AboutScrollViewEffects2.swift */,
+				DEDF8D97260A4A9C00DCB03B /* AboutLayout.swift */,
+				DEDF8D9A260A4E6700DCB03B /* AboutAlignment.swift */,
+				DEDF8D9D260A533900DCB03B /* AboutCustomAlignmentGuide.swift */,
+				DEDF8DA0260A57F200DCB03B /* AboutAbsolutePositioning.swift */,
 				DEDF8D8B260A461500DCB03B /* Assets.xcassets */,
 				DEDF8D90260A461500DCB03B /* Info.plist */,
 				DEDF8D8D260A461500DCB03B /* Preview Content */,
@@ -139,7 +160,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEDF8D8A260A461200DCB03B /* ContentView.swift in Sources */,
+				DEDF8DA4260A5B5000DCB03B /* AboutFramesCoordinates.swift in Sources */,
+				DEDF8D9E260A533900DCB03B /* AboutCustomAlignmentGuide.swift in Sources */,
+				DEDF8DA1260A57F200DCB03B /* AboutAbsolutePositioning.swift in Sources */,
+				DEDF8DA7260A61BC00DCB03B /* AboutScrollViewEffects.swift in Sources */,
+				DEDF8D9B260A4E6700DCB03B /* AboutAlignment.swift in Sources */,
 				DEDF8D88260A461200DCB03B /* LayoutAndGeometryApp.swift in Sources */,
+				DEDF8DAA260A63A200DCB03B /* AboutScrollViewEffects2.swift in Sources */,
+				DEDF8D98260A4A9C00DCB03B /* AboutLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
