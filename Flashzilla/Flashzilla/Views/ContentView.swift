@@ -31,6 +31,7 @@ struct ContentView: View {
     @State private var engine: CHHapticEngine?
     
     @State private var isReplayingWrongCards = true
+    @State private var isShowingSettingsView = false
 
     var body: some View {
         ZStack {
@@ -59,15 +60,20 @@ struct ContentView: View {
                 }
                 
                 ZStack {
-                    ForEach(0..<cards.count, id: \.self) { index in
-                        CardView(card: self.cards[index]) {
+                    ForEach(cards) { card in
+                        CardView(card: card, isReplayingWrongCards: self.isReplayingWrongCards) { isCorrect in
+                            if self.isReplayingWrongCards && !isCorrect {
+                                self.restackCard(at: self.index(for: card))
+                                return
+                            }
+                            
                             withAnimation {
-                                self.removeCard(at: index)
+                                self.removeCard(at: self.index(for: card))
                             }
                         }
-                        .stacked(at: index, in: self.cards.count)
-                        .allowsHitTesting(index == self.cards.count - 1)
-                        .accessibility(hidden: index < self.cards.count - 1)
+                        .stacked(at: self.index(for: card), in: self.cards.count)
+                        .allowsHitTesting(self.index(for: card) == self.cards.count - 1)
+                        .accessibility(hidden: self.index(for: card) < self.cards.count - 1)
                     }
                 }
                 .allowsHitTesting(timeRemaining > 0) // end user interactivity when user's out of time
@@ -82,6 +88,15 @@ struct ContentView: View {
             
             VStack {
                 HStack {
+                    Button(action: {
+                        self.isShowingSettingsView = true
+                    }, label: {
+                        Image(systemName: "gear")
+                            .padding()
+                            .background(Color.black.opacity(0.7))
+                            .clipShape(Circle())
+                    })
+                    
                     Spacer()
 
                     Button(action: {
@@ -162,6 +177,9 @@ struct ContentView: View {
         .sheet(isPresented: $showingEditScreen, onDismiss: resetCards) {
             EditCards()
         }
+        .sheet(isPresented: $isShowingSettingsView, content: {
+            SettingsView(isReplayingWrongCards: $isReplayingWrongCards)
+        })
         .onAppear(perform: resetCards)
     }
     
@@ -180,6 +198,10 @@ struct ContentView: View {
         let card = cards[index]
         cards.remove(at: index)
         cards.insert(card, at: 0)
+    }
+    
+    func index(for card: Card) -> Int {
+        return cards.firstIndex(where: { $0.id == card.id }) ?? 0
     }
     
     func resetCards() {

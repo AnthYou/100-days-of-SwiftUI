@@ -21,6 +21,7 @@
 		DEC5CD8B2603CA2D00BB6C45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC5CD8A2603CA2D00BB6C45 /* Preview Assets.xcassets */; };
 		DEC5CD952603CA6700BB6C45 /* AboutGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC5CD942603CA6700BB6C45 /* AboutGestures.swift */; };
 		DEC5CD982603DD7200BB6C45 /* GestureSequenceDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC5CD972603DD7200BB6C45 /* GestureSequenceDemo.swift */; };
+		DEDF8D77260A396A00DCB03B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDF8D76260A396A00DCB03B /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		DEC5CD8C2603CA2D00BB6C45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEC5CD942603CA6700BB6C45 /* AboutGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutGestures.swift; sourceTree = "<group>"; };
 		DEC5CD972603DD7200BB6C45 /* GestureSequenceDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureSequenceDemo.swift; sourceTree = "<group>"; };
+		DEDF8D76260A396A00DCB03B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				DEC5CD852603CA2B00BB6C45 /* ContentView.swift */,
 				DE96F2942604F5DB006BFEFF /* CardView.swift */,
 				DE8A3A8E260659AE00E92650 /* EditCards.swift */,
+				DEDF8D76260A396A00DCB03B /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				DE8A3A8F260659AE00E92650 /* EditCards.swift in Sources */,
 				DE96F2952604F5DB006BFEFF /* CardView.swift in Sources */,
 				DEC5CD842603CA2B00BB6C45 /* FlashzillaApp.swift in Sources */,
+				DEDF8D77260A396A00DCB03B /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
