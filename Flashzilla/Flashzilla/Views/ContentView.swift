@@ -15,6 +15,10 @@ extension View {
     }
 }
 
+enum SheetType {
+    case editSheet, settingsSheet
+}
+
 struct ContentView: View {
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
     @Environment(\.accessibilityEnabled) var accessibilityEnabled
@@ -25,13 +29,13 @@ struct ContentView: View {
     @State private var isActive = true
     @State private var timeRemaining = 100
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
-    @State private var showingEditScreen = false
-    
+        
     @State private var engine: CHHapticEngine?
     
     @State private var isReplayingWrongCards = true
-    @State private var isShowingSettingsView = false
+    
+    @State private var showingSheet = false
+    @State private var sheetType: SheetType = .editSheet
 
     var body: some View {
         ZStack {
@@ -89,7 +93,8 @@ struct ContentView: View {
             VStack {
                 HStack {
                     Button(action: {
-                        self.isShowingSettingsView = true
+                        self.sheetType = .settingsSheet
+                        self.showingSheet = true
                     }, label: {
                         Image(systemName: "gear")
                             .padding()
@@ -100,7 +105,8 @@ struct ContentView: View {
                     Spacer()
 
                     Button(action: {
-                        self.showingEditScreen = true
+                        self.sheetType = .editSheet
+                        self.showingSheet = true
                     }) {
                         Image(systemName: "plus.circle")
                             .padding()
@@ -179,12 +185,13 @@ struct ContentView: View {
                 self.isActive = true
             }
         }
-        .sheet(isPresented: $showingEditScreen, onDismiss: resetCards) {
-            EditCards()
+        .sheet(isPresented: $showingSheet, onDismiss: resetCards) {
+            if sheetType == .editSheet {
+                EditCards()
+            } else {
+                SettingsView(isReplayingWrongCards: $isReplayingWrongCards)
+            }
         }
-        .sheet(isPresented: $isShowingSettingsView, content: {
-            SettingsView(isReplayingWrongCards: $isReplayingWrongCards)
-        })
         .onAppear(perform: resetCards)
     }
     
