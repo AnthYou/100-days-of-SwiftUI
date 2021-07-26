@@ -35,6 +35,21 @@ struct ContentView: View {
         }
     }
 
+    var filteredResorts: [Resort] {
+        switch filterOption {
+        case .country:
+            return sortedResorts.filter({ $0.country == "France" })
+        case .price:
+            return sortedResorts.filter({ $0.price == 2 })
+        case .size:
+            return sortedResorts.filter({ $0.size == 2 })
+        default:
+            return sortedResorts
+        }
+    }
+
+    let countries: [String] = ["Canada", "France", "Italy", "United States"]
+
     @State private var showingActionSheet = false
     @State private var actionSheetType: ActionSheetType = .sort
     @State private var sortingOption: SortingOption = .none
@@ -42,7 +57,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List(sortedResorts) { resort in
+            List(filteredResorts) { resort in
                 NavigationLink(destination: ResortView(resort: resort)) {
                     Image(resort.country)
                         .resizable()
