@@ -7,14 +7,42 @@
 
 import SwiftUI
 
+enum ActionSheetType {
+    case sort, filter
+}
+
+enum SortingOption {
+    case none, alphabetical, country
+}
+
+enum FilterOption {
+    case none, country, size, price
+}
+
 struct ContentView: View {
     @ObservedObject var favorites = Favorites()
 
     let resorts: [Resort] = Bundle.main.decode("resorts.json")
 
+    var sortedResorts: [Resort] {
+        switch sortingOption {
+        case .alphabetical:
+            return resorts.sorted(by: { $0.name < $1.name })
+        case .country:
+            return resorts.sorted(by: { $0.country < $1.country })
+        default:
+            return resorts
+        }
+    }
+
+    @State private var showingActionSheet = false
+    @State private var actionSheetType: ActionSheetType = .sort
+    @State private var sortingOption: SortingOption = .none
+    @State private var filterOption: FilterOption = .none
+
     var body: some View {
         NavigationView {
-            List(resorts) { resort in
+            List(sortedResorts) { resort in
                 NavigationLink(destination: ResortView(resort: resort)) {
                     Image(resort.country)
                         .resizable()
@@ -45,6 +73,44 @@ struct ContentView: View {
                 }
             }
             .navigationBarTitle("Resorts")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        self.actionSheetType = .sort
+                        self.showingActionSheet = true
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                        Text("Sort")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        self.actionSheetType = .filter
+                        self.showingActionSheet = true
+                    } label: {
+                        Image(systemName: "line.horizontal.3.decrease.circle")
+                        Text("Filter")
+                    }
+                }
+            }
+            .actionSheet(isPresented: $showingActionSheet) {
+                if self.actionSheetType == .sort {
+                    return ActionSheet(title: Text("Sort resorts by"), message: Text("Select a sorting type"), buttons: [
+                        .default(Text("Default")) { self.sortingOption = .none },
+                        .default(Text("Alphabetical")) { self.sortingOption = .alphabetical },
+                        .default(Text("Country")) { self.sortingOption = .country },
+                        .cancel()
+                    ])
+                } else {
+                    return ActionSheet(title: Text("Filter resort by"), message: Text("Select a filter"), buttons: [
+                        .default(Text("Default")) { self.filterOption = .none },
+                        .default(Text("Country")) { self.filterOption = .country },
+                        .default(Text("Size")) { self.filterOption = .size },
+                        .default(Text("Price")) { self.filterOption = .price },
+                        .cancel()
+                    ])
+                }
+            }
 
             WelcomeView()
         }
