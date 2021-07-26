@@ -35,22 +35,32 @@ struct ContentView: View {
         }
     }
 
+    @State private var filterParameter: String = ""
+
     var filteredResorts: [Resort] {
+        var list = sortedResorts
+        list = filterResorts(parameter: filterParameter)
+
+        return list
+    }
+
+    func filterResorts(parameter: String) -> [Resort] {
         switch filterOption {
         case .country:
-            return sortedResorts.filter({ $0.country == "France" })
+            return sortedResorts.filter({ $0.country == parameter })
         case .price:
-            return sortedResorts.filter({ $0.price == 2 })
+            return sortedResorts.filter({ $0.price == Int(parameter) })
         case .size:
-            return sortedResorts.filter({ $0.size == 2 })
+            return sortedResorts.filter({ $0.size == Int(parameter) })
         default:
             return sortedResorts
         }
     }
 
-    let countries: [String] = ["Canada", "France", "Italy", "United States"]
+    let countries: [String] = ["Austria", "Canada", "France", "Italy", "United States"]
 
     @State private var showingActionSheet = false
+    @State private var showingFilterSheet = false
     @State private var actionSheetType: ActionSheetType = .sort
     @State private var sortingOption: SortingOption = .none
     @State private var filterOption: FilterOption = .none
@@ -119,9 +129,18 @@ struct ContentView: View {
                 } else {
                     return ActionSheet(title: Text("Filter resort by"), message: Text("Select a filter"), buttons: [
                         .default(Text("Default")) { self.filterOption = .none },
-                        .default(Text("Country")) { self.filterOption = .country },
-                        .default(Text("Size")) { self.filterOption = .size },
-                        .default(Text("Price")) { self.filterOption = .price },
+                        .default(Text("Country")) {
+                            self.filterOption = .country
+                            self.showingFilterSheet = true
+                        },
+                        .default(Text("Size")) {
+                            self.filterOption = .size
+                            self.showingFilterSheet = true
+                        },
+                        .default(Text("Price")) {
+                            self.filterOption = .price
+                            self.showingFilterSheet = true
+                        },
                         .cancel()
                     ])
                 }
@@ -131,6 +150,33 @@ struct ContentView: View {
         }
         .environmentObject(favorites)
         .phoneOnlyStackNavigationView()
+        .actionSheet(isPresented: $showingFilterSheet) {
+            if self.filterOption == .country {
+                return ActionSheet(title: Text("Choose a country"), buttons: [
+                    .default(Text("Austria")) { self.filterParameter = countries[0] },
+                    .default(Text("Canada")) { self.filterParameter = countries[1] },
+                    .default(Text("France")) { self.filterParameter = countries[2] },
+                    .default(Text("Italy")) { self.filterParameter = countries[3] },
+                    .default(Text("United States")) { self.filterParameter = countries[4] },
+                    .cancel()
+                ])
+            } else if self.filterOption == .size {
+                return ActionSheet(title: Text("Choose a size"), buttons: [
+                    .default(Text("1")) { self.filterParameter = "1" },
+                    .default(Text("2")) { self.filterParameter = "2" },
+                    .default(Text("3")) { self.filterParameter = "3" },
+                    .cancel()
+                ])
+
+            } else {
+                return ActionSheet(title: Text("Choose a price"), buttons: [
+                    .default(Text("1")) { self.filterParameter = "1" },
+                    .default(Text("2")) { self.filterParameter = "2" },
+                    .default(Text("3")) { self.filterParameter = "3" },
+                    .cancel()
+                ])
+            }
+        }
     }
 }
 
